@@ -1,0 +1,26 @@
+[package]
+name = "xtool-gui"
+version = "0.1.0"
+edition = "2024"
+description = "A minimal, fast desktop GUI for xtool: build, run, sign and export iOS apps on macOS, Linux and Windows (WSL)"
+license = "MIT"
+readme = "README.md"
+keywords = ["ios", "xtool", "swiftpm", "gui", "xcode"]
+categories = ["development-tools"]
+
+[dependencies]
+eframe = { version = "0.36", default-features = false, features = ["default_fonts", "glow", "persistence", "wayland", "x11"] }
+egui = "0.36"
+portable-pty = "0.9"
+rfd = "0.17"
+serde = { version = "1.0.229", features = ["derive"] }
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = true
+panic = "abort"
